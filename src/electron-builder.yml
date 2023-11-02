@@ -1,0 +1,46 @@
+productName: app-name # app name
+appId: com.${productName}.${productName}_app
+copyright: Copyright © 2023 SUKBEOM.H # copyright
+
+asar: true
+
+win:
+  icon: ../image/*icon-image*.png # icon image
+  target:
+    - target: nsis
+      arch: x64
+  certificateFile: certificate/cert.pfx # certificate file
+  certificatePassword: cert-password # certificate password
+
+portable:
+  artifactName: ${productName}.${ext}
+
+nsis:
+  deleteAppDataOnUninstall: true
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  perMachine: true
+  uninstallDisplayName: ${productName}_uninstaller
+  warningsAsErrors: false
+  artifactName: ${productName}_Windows.${ext}
+
+mac:
+  icon: ../image/*icon-image*.png # icon image
+  target:
+    - target: default
+      arch: ['x64', 'arm64']
+  category: public.app-category.education
+  artifactName: ${productName}_${arch}.${ext}
+  type: distribution
+  minimumSystemVersion: 10.12.0
+  hardenedRuntime: true
+  entitlements: entitlements.mac.plist
+  gatekeeperAssess: false
+  # notarize: true
+
+publish:
+    provider: github
+    token: token-of-github # github token
+    releaseType: release
+
+# afterSign: src/notarize.js

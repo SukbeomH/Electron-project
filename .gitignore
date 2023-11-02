@@ -1,0 +1,4 @@
+node_modules
+dist
+typescript
+cert.pfx
